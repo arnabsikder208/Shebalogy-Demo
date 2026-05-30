@@ -1,0 +1,575 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ── Fonts ── */
+/* Explicitly importing Noto Sans Bengali for that clean, premium iOS look on all devices */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-silver: var(--silver);
+  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
+  
+  /* UPDATED: Put Noto Sans Bengali first here so the entire site falls back to it automatically */
+  --font-sans: "Noto Sans Bengali", "Inter", "Kohinoor Bangla", "SolaimanLipi", system-ui, sans-serif;
+  --font-bangla: "Noto Sans Bengali", "Kohinoor Bangla", "SolaimanLipi", sans-serif;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   LIGHT — iOS 26 glass
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+:root {
+  --radius: 1.125rem;
+
+  --background: oklch(0.93 0.008 220);
+  --foreground: oklch(0.10 0.045 250);
+
+  --card: oklch(99.107% 0.00011 271.152 / 0.397);
+  --card-foreground: oklch(0.12 0.045 250);
+
+  --popover: oklch(0.99 0 0 / 0.82);
+  --popover-foreground: oklch(0.12 0.045 250);
+
+  --primary: oklch(0.22 0.10 258);
+  --primary-foreground: oklch(0.97 0.005 240);
+
+  --secondary: oklch(0.88 0.015 250);
+  --secondary-foreground: oklch(0.16 0.07 258);
+
+  --muted: oklch(0.90 0.012 250);
+  --muted-foreground: oklch(0.38 0.04 255);
+
+  --accent: oklch(0.86 0.04 250);
+  --accent-foreground: oklch(0.16 0.07 258);
+
+  --destructive: oklch(0.52 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  --border: oklch(0.82 0.015 250);
+  --input: oklch(0.88 0.012 250);
+  --ring: oklch(0.42 0.09 258);
+
+  --navy:     oklch(0.22 0.10 258);
+  --navy-deep: oklch(0.13 0.08 258);
+  --silver:    oklch(0.70 0.012 250);
+
+  /* header text is always white */
+  --header-fg: oklch(1 0 0);
+
+  --gradient-hero:   linear-gradient(145deg, oklch(0.14 0.08 258) 0%, oklch(0.22 0.10 258) 45%, oklch(0.34 0.07 235) 100%);
+  --gradient-glass:  linear-gradient(135deg, oklch(1 0 0 / 0.38) 0%, oklch(1 0 0 / 0.12) 50%);
+  --gradient-glass-strong: linear-gradient(145deg, oklch(1 0 0 / 0.55) 0%, oklch(1 0 0 / 0.20) 60%, oklch(0.94 0.02 240 / 0.08) 100%);
+  --gradient-accent: linear-gradient(135deg, oklch(0.46 0.13 258), oklch(0.22 0.10 258));
+
+  --shadow-glass: 0 8px 32px oklch(0.13 0.08 258 / 0.14),
+                  0 2px 8px  oklch(0.13 0.08 258 / 0.08),
+                  inset 0 1px 0 oklch(1 0 0 / 0.55),
+                  inset 0 -1px 0 oklch(1 0 0 / 0.08);
+  --shadow-glow:  0 0 48px oklch(0.45 0.16 258 / 0.30);
+  --shadow-soft:  0 12px 48px -12px oklch(0.13 0.08 258 / 0.22);
+  --shadow-card:  0 4px 24px oklch(0.13 0.08 258 / 0.10),
+                  inset 0 1px 0 oklch(1 0 0 / 0.60);
+
+  --medical-red:   oklch(0.55 0.20 22);
+  --medical-teal:  oklch(0.52 0.12 195);
+  --medical-green: oklch(0.52 0.14 155);
+  --medical-pulse: oklch(0.58 0.22 22);
+
+  /* animated BG mesh stops — morphed by JS/CSS vars trick */
+  --orb1-x: 18%;  --orb1-y: 20%;
+  --orb2-x: 80%;  --orb2-y: 70%;
+  --orb3-x: 50%;  --orb3-y: 50%;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   DARK
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.dark {
+  --background: oklch(0.10 0.035 258);
+  --foreground: oklch(0.96 0.006 240);
+  --card: oklch(0.16 0.045 258 / 0.75);
+  --card-foreground: oklch(0.96 0.006 240);
+  --popover: oklch(0.16 0.045 258 / 0.90);
+  --popover-foreground: oklch(0.96 0.006 240);
+  --primary: oklch(0.72 0.07 258);
+  --primary-foreground: oklch(0.14 0.05 258);
+  --secondary: oklch(0.22 0.045 258);
+  --secondary-foreground: oklch(0.96 0.006 240);
+  --muted: oklch(0.22 0.045 258);
+  --muted-foreground: oklch(0.68 0.025 250);
+  --accent: oklch(0.26 0.055 258);
+  --accent-foreground: oklch(0.96 0.006 240);
+  --border: oklch(1 0 0 / 0.12);
+  --input: oklch(1 0 0 / 0.14);
+  --ring: oklch(0.58 0.09 258);
+
+  --gradient-glass: linear-gradient(135deg, oklch(1 0 0 / 0.10) 0%, oklch(1 0 0 / 0.04) 100%);
+  --shadow-glass: 0 8px 32px oklch(0.05 0.03 258 / 0.50),
+                  inset 0 1px 0 oklch(1 0 0 / 0.14);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BASE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: transparent !important;
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-smoothing: grayscale;
+    position: relative;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+
+  /* White headers everywhere */
+ /* White headers everywhere */
+h1 {
+  /* UPDATED: Added var(--font-bangla) right after your display font */
+  font-family: var(--font-display), var(--font-bangla);
+  letter-spacing: -0.025em;
+  color: var(--header-fg);
+}
+
+  /* On light backgrounds a section can opt out with .headers-dark */
+  .headers-dark h1,
+  .headers-dark h2,
+  .headers-dark h3,
+  .headers-dark h4,
+  .headers-dark h5 {
+    color: var(--color-foreground);
+  }
+
+  /* Setting standard properties for Bangla rendering contextually */
+  :lang(bn), .font-bangla, [data-lang="bn"] {
+    font-family: var(--font-bangla);
+    font-feature-settings: "kern" 1, "liga" 1;
+    letter-spacing: 0.01em;
+    line-height: 1.75;
+  }
+
+  /* =======================================
+      ANIMATED BACKGROUND — pure CSS, no JS
+     ======================================= */
+
+  /* Layer 0 — Deep background graphic applied dynamically to ALL routes */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+    background-image: url("/doodlebg.jpg");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  /* Safe Fallback: Forces any hidden section containers to go transparent 
+      so they do not cover up your global background asset */
+  main, 
+  #root, 
+  .min-h-screen.bg-background,
+  div[class*="bg-background"] {
+    background-color: transparent !important;
+  }
+
+  /* Layer 1 — three morphing radial orbs */
+  body .bg-orbs {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  body .bg-orbs::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 55% 45% at var(--orb1-x) var(--orb1-y),
+        oklch(0.52 0.12 195 / 0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 55% at var(--orb2-x) var(--orb2-y),
+        oklch(0.52 0.14 155 / 0.14) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at var(--orb3-x) var(--orb3-y),
+        oklch(0.45 0.08 250 / 0.10) 0%, transparent 70%);
+    animation: orbDrift1 20s ease-in-out infinite alternate,
+                orbColor  28s ease-in-out infinite alternate;
+  }
+  body .bg-orbs::after {
+    content: "";
+    position: absolute;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    top: 30%; left: 60%;
+    background: radial-gradient(circle,
+      oklch(0.55 0.20 22 / 0.07) 0%, transparent 70%);
+    animation: heartOrbPulse 3s ease-in-out infinite;
+  }
+
+  /* Layer 2 — scrolling ECG heartbeat line */
+  body .bg-ecg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  body .bg-ecg::before {
+    content: "";
+    position: absolute;
+    top: calc(50% - 30px);
+    left: 0;
+    width: 200%;
+    height: 80px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='80' viewBox='0 0 800 80'%3E%3Cpolyline points='0,40 80,40 100,40 112,14 120,66 128,26 136,54 144,40 240,40 260,40 272,14 280,66 288,26 296,54 304,40 400,40 420,40 432,14 440,66 448,26 456,54 464,40 560,40 580,40 592,14 600,66 608,26 616,54 624,40 720,40 740,40 752,14 760,66 768,26 776,54 784,40 800,40' fill='none' stroke='%230d9488' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' opacity='0.30'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 800px 80px;
+    animation: ecgScroll 10s linear infinite;
+  }
+  body .bg-ecg::after {
+    content: "";
+    position: absolute;
+    top: calc(50% + 60px);
+    left: 0;
+    width: 200%;
+    height: 60px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='60' viewBox='0 0 600 60'%3E%3Cpolyline points='0,30 60,30 75,30 84,10 90,50 96,18 102,42 108,30 180,30 195,30 204,10 210,50 216,18 222,42 228,30 300,30 315,30 324,10 330,50 336,18 342,42 348,30 420,30 435,30 444,10 450,50 456,18 462,42 468,30 540,30 555,30 564,10 570,50 576,18 582,42 588,30 600,30' fill='none' stroke='%2322c55e' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round' opacity='0.18'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 600px 60px;
+    animation: ecgScroll 14s linear infinite reverse;
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   UTILITIES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@layer utilities {
+
+  /* iOS 26 liquid glass */
+  .glass {
+    background: var(--gradient-glass);
+    backdrop-filter: blur(28px) saturate(200%) brightness(1.04);
+    -webkit-backdrop-filter: blur(28px) saturate(200%) brightness(1.04);
+    border: 1px solid oklch(1 0 0 / 0.36);
+    border-bottom-color: oklch(1 0 0 / 0.14);
+    border-right-color: oklch(1 0 0 / 0.14);
+    box-shadow: var(--shadow-glass);
+    transition: box-shadow 0.35s ease, transform 0.35s ease, background 0.35s ease;
+  }
+  .glass:hover {
+    box-shadow: var(--shadow-glass), var(--shadow-glow);
+    transform: translateY(-2px) scale(1.005);
+    background: linear-gradient(135deg, oklch(1 0 0 / 0.46) 0%, oklch(1 0 0 / 0.18) 100%);
+  }
+
+  .glass-strong {
+    background: var(--gradient-glass-strong);
+    backdrop-filter: blur(36px) saturate(220%) brightness(1.06);
+    -webkit-backdrop-filter: blur(36px) saturate(220%) brightness(1.06);
+    border: 1px solid oklch(1 0 0 / 0.50);
+    border-bottom-color: oklch(1 0 0 / 0.20);
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 0.35s ease, transform 0.35s ease;
+  }
+  .glass-strong:hover {
+    box-shadow: var(--shadow-card), 0 16px 48px oklch(0.22 0.10 258 / 0.18);
+    transform: translateY(-3px) scale(1.008);
+  }
+
+  .glass-dark {
+    background: linear-gradient(135deg, oklch(0.14 0.07 258 / 0.70), oklch(0.14 0.07 258 / 0.38));
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid oklch(1 0 0 / 0.14);
+    box-shadow: var(--shadow-glass);
+    transition: box-shadow 0.35s ease, transform 0.35s ease;
+  }
+  .glass-dark:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glass), var(--shadow-glow);
+  }
+
+  /* Card lift */
+  .card-lift {
+    transition: transform 0.30s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.30s ease;
+    will-change: transform;
+  }
+  .card-lift:hover {
+    transform: translateY(-4px) scale(1.012);
+    box-shadow: var(--shadow-soft), 0 20px 60px oklch(0.13 0.08 258 / 0.12);
+  }
+
+  /* Shimmer sweep */
+  .box-shimmer {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.30s ease, box-shadow 0.30s ease;
+  }
+  .box-shimmer::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%; height: 100%;
+    background: linear-gradient(105deg, transparent 20%, oklch(1 0 0 / 0.18) 50%, transparent 80%);
+    transform: skewX(-15deg);
+    transition: left 0.55s ease;
+    pointer-events: none;
+  }
+  .box-shimmer:hover::before { left: 160%; }
+  .box-shimmer:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); }
+
+  /* Pulse border */
+  .box-pulse-border {
+    transition: box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .box-pulse-border:focus-within,
+  .box-pulse-border:hover {
+    border-color: oklch(0.52 0.12 195 / 0.60);
+    box-shadow: 0 0 0 3px oklch(0.52 0.12 195 / 0.14), var(--shadow-card);
+  }
+
+  /* Animation helpers */
+  .animate-breathe   { animation: breathe 4s ease-in-out infinite; }
+  .animate-heartbeat { animation: heartbeat 1.4s ease-in-out infinite; }
+  .animate-float          { animation: float 6s ease-in-out infinite; }
+  .animate-float-slow     { animation: float 9s ease-in-out infinite; }
+  .animate-float-delayed  { animation: float 6s ease-in-out infinite; animation-delay: -3s; }
+  .animate-fade-up        { animation: fadeUp 0.80s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .animate-pulse-soft     { animation: pulseSoft 3s ease-in-out infinite; }
+  .animate-slide-in       { animation: slideIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+  /* Gradients */
+  .gradient-hero   { background: var(--gradient-hero); }
+  .gradient-accent { background: var(--gradient-accent); }
+  .text-gradient {
+    background: linear-gradient(135deg, oklch(0.22 0.10 258), oklch(0.46 0.13 258));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Shadows */
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-card { box-shadow: var(--shadow-card); }
+
+  /* Medical specific UI accents */
+  .text-medical-red   { color: var(--medical-red); }
+  .text-medical-teal  { color: var(--medical-teal); }
+  .text-medical-green { color: var(--medical-green); }
+  .bg-medical-teal    { background-color: oklch(0.52 0.12 195 / 0.12); }
+
+  /* Bangla Typography variables */
+  .font-bangla         { font-family: var(--font-bangla); }
+  .font-bangla-display {
+    font-family: var(--font-bangla);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 1.5;
+  }
+
+  /* ── FAQ accordion classes ── */
+  .faq-item {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: box-shadow 0.30s ease, transform 0.30s ease;
+  }
+  .faq-item:hover { transform: translateY(-1px); }
+
+  .faq-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1.25rem 1.5rem;
+    text-align: left;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--header-fg);
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    transition: background 0.25s ease;
+    gap: 1rem;
+  }
+  .faq-trigger:hover {
+    background: oklch(1 0 0 / 0.06);
+  }
+
+  .faq-icon {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid oklch(1 0 0 / 0.40);
+    display: grid;
+    place-items: center;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+                background 0.25s ease,
+                border-color 0.25s ease;
+    color: oklch(1 0 0 / 0.70);
+  }
+  .faq-trigger[aria-expanded="true"] .faq-icon {
+    transform: rotate(45deg);
+    background: oklch(0.52 0.12 195 / 0.30);
+    border-color: var(--medical-teal);
+    color: var(--medical-teal);
+  }
+
+  .faq-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.40s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .faq-body.open {
+    grid-template-rows: 1fr;
+  }
+  .faq-body-inner {
+    overflow: hidden;
+    padding: 0 1.5rem;
+    color: oklch(0.88 0.008 240);
+    font-size: 0.9375rem;
+    line-height: 1.75;
+  }
+  .faq-body.open .faq-body-inner {
+    padding-bottom: 1.25rem;
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   KEYFRAMES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* Orb position drift loop */
+@keyframes orbDrift1 {
+  0%   { --orb1-x: 18%; --orb1-y: 20%; --orb2-x: 80%; --orb2-y: 70%; --orb3-x: 50%; --orb3-y: 50%; }
+  25%  { --orb1-x: 30%; --orb1-y: 40%; --orb2-x: 65%; --orb2-y: 25%; --orb3-x: 70%; --orb3-y: 60%; }
+  50%  { --orb1-x: 12%; --orb1-y: 65%; --orb2-x: 88%; --orb2-y: 45%; --orb3-x: 40%; --orb3-y: 30%; }
+  75%  { --orb1-x: 55%; --orb1-y: 15%; --orb2-x: 20%; --orb2-y: 80%; --orb3-x: 80%; --orb3-y: 70%; }
+  100% { --orb1-x: 18%; --orb1-y: 20%; --orb2-x: 80%; --orb2-y: 70%; --orb3-x: 50%; --orb3-y: 50%; }
+}
+
+@keyframes orbColor {
+  0%, 100% { filter: hue-rotate(0deg) brightness(1); }
+  50%       { filter: hue-rotate(25deg) brightness(1.08); }
+}
+
+/* Pulsing red "heart" ambient circle */
+@keyframes heartOrbPulse {
+  0%, 100% { transform: scale(1);    opacity: 0.5; }
+  50%       { transform: scale(1.25); opacity: 1;   }
+}
+
+/* Scrolling ticker effect for vector ECG lines */
+@keyframes ecgScroll {
+  from { background-position: 0 0; }
+  to   { background-position: -800px 0; }
+}
+
+/* Micro-interaction transformations */
+@keyframes float {
+  0%,  100% { transform: translateY(0)     translateX(0); }
+  50%        { transform: translateY(-16px) translateX(4px); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulseSoft {
+  0%,  100% { box-shadow: 0 0 0 0    oklch(0.52 0.12 195 / 0.50); }
+  50%        { box-shadow: 0 0 0 16px oklch(0.52 0.12 195 / 0); }
+}
+@keyframes heartbeat {
+  0%,  100% { transform: scale(1); }
+  14%        { transform: scale(1.12); }
+  28%        { transform: scale(1); }
+  42%        { transform: scale(1.06); }
+  70%        { transform: scale(1); }
+}
+@keyframes breathe {
+  0%,  100% { transform: scale(1);     box-shadow: var(--shadow-card); }
+  50%        { transform: scale(1.004); box-shadow: var(--shadow-card), 0 0 24px oklch(0.52 0.12 195 / 0.12); }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FLOATING MEDICAL CROSSES ENGINE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.medical-bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.medical-bg-layer .cross {
+  position: absolute;
+  bottom: -40px;
+  opacity: 0;
+  animation: floatCross linear infinite;
+  color: var(--medical-teal);
+}
+.medical-bg-layer .cross::before,
+.medical-bg-layer .cross::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+  border-radius: 2px;
+  opacity: 0.25;
+}
+.medical-bg-layer .cross::before { width: 100%; height: 33%; top: 33%; left: 0; }
+.medical-bg-layer .cross::after  { width: 33%; height: 100%; top: 0; left: 33%; }
+
+.medical-bg-layer .cross:nth-child(1) { left:  6%; width: 14px; height: 14px; animation-duration: 22s; animation-delay:  0s; }
+.medical-bg-layer .cross:nth-child(2) { left: 20%; width: 10px; height: 10px; animation-duration: 28s; animation-delay: -6s;  color: var(--medical-green); }
+.medical-bg-layer .cross:nth-child(3) { left: 37%; width: 18px; height: 18px; animation-duration: 20s; animation-delay:-12s; }
+.medical-bg-layer .cross:nth-child(4) { left: 54%; width: 12px; height: 12px; animation-duration: 26s; animation-delay: -4s;  color: var(--medical-green); }
+.medical-bg-layer .cross:nth-child(5) { left: 70%; width: 16px; height: 16px; animation-duration: 24s; animation-delay:-18s; }
+.medical-bg-layer .cross:nth-child(6) { left: 84%; width: 10px; height: 10px; animation-duration: 30s; animation-delay: -8s;  color: var(--medical-teal); }
+.medical-bg-layer .cross:nth-child(7) { left: 92%; width: 14px; height: 14px; animation-duration: 18s; animation-delay:-22s; }
+.medical-bg-layer .cross:nth-child(8) { left: 46%; width: 20px; height: 20px; animation-duration: 32s; animation-delay:-16s; color: var(--medical-green); }
+
+@keyframes floatCross {
+  0%   { transform: translateY(0)     rotate(0deg);   opacity: 0;    }
+  5%   {                                               opacity: 0.18; }
+  90%  {                                               opacity: 0.10; }
+  100% { transform: translateY(-105vh) rotate(360deg); opacity: 0;    }
+}
